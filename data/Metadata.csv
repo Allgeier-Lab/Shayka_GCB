@@ -1,0 +1,82 @@
+﻿File,Variable,Description,Units
+AGdata,Days,Number of days of growth,days
+AGdata,CoreID,Reef_Transect_Distance_Core,
+AGdata,ShootID,Reef_Transect_Distance_Core_Shoot,
+AGdata,BladeID,Reef_Transect_Distance_Core_Shoot_Blade,
+AGdata,Reef,Reef name; all are YM; number is block; letter is treatment,
+AGdata,Transect,"1, 2, or 3 depending on order of sample collection",
+AGdata,Distance,1 or 20 meters from reef,m
+AGdata,Core,"Replicate (1, 2, or 3)",
+AGdata,Species,Thalassia testudinum,
+AGdata,Shoot,Replicate shoot within core,
+AGdata,Flower?,Did the shoot have a flower? Y if yes,
+AGdata,Blade,Replicate blade within shoot,
+AGdata,Blade_Tin,Tin used for weighing,
+AGdata,Growth,Distance from original growth hole to current hole location on blade,mm
+AGdata,Length,Legth of blade,mm
+AGdata,Bitten,Was the top of the blade bitten off? Y if yes,
+AGdata,Width,Width of blade,mm
+AGdata,Epiphyte_Tin,Tin used for weighing,
+AGdata,Blade_dry_weight,Total dry weight of all blades within a shoot,g
+AGdata,Epiphyte_dry_weight,Total dry weight of all epiphytes from a shoot,g
+AGdata,Bites,Total number of fish bites on all blades in a shoot,bites
+AGnutrient data,Contents,"Part of plant (blades, sheaths, rhizomes, roots, flowers, detritus)",
+AGnutrient data,CoreID,Reef_Transect_Distance_Core,
+AGnutrient data,N,Elemental percent nitrogen by weight,%
+AGnutrient data,d15N,Nitrogen isotope delta value for 15N measured against a primary reference scale (Atmospheric air),per mil
+AGnutrient data,C,Elemental percent carbon by weight,%
+AGnutrient data,d13C,Carbon isotope delta value for 13C measured against a primary reference scale (Vienna Pee Dee Belemnite),per mil
+AGPdata,Reef,Reef name; all are YM; number is block; letter is treatment,
+AGPdata,Transect,"1, 2, or 3 depending on order of sample collection",
+AGPdata,Distance,1 or 20 meters from reef,m
+AGPdata,Core,"Replicate (1, 2, or 3)",
+AGPdata,P,Percent phosphorus by weight,%
+AGPdata,Contents,"Part of plant (blades, sheaths, rhizomes, roots, flowers, detritus)",
+AGPdata,CoreID,Reef_Transect_Distance_Core,
+BGdata,CoreID,Reef_Transect_Distance_Core,
+BGdata,Reef,Reef name; all are YM; number is block; letter is treatment,
+BGdata,Transect,"1, 2, or 3 depending on order of sample collection",
+BGdata,Distance,1 or 20 meters from reef,m
+BGdata,Core,"Replicate (1, 2, or 3)",
+BGdata,Tin,Tin used for weighing,
+BGdata,Contents,"Part of plant (blades, sheaths, rhizomes, roots, flowers, detritus)",
+BGdata,Notes,Was this subsample dipped in HCl to remove fine sand? Acid if yes,
+BGdata,Dry_weight,Dry weight of subsample in this row,g
+BGnutrientdata,SampleID,"Reef_Transect_Distance_Core_ContentAbbreviation_SubreplicateNumberIfApplicable (Content abbreviations: S=sheaths, Rz=rhizomes, Rt=roots)",
+BGnutrientdata,N,Elemental percent nitrogen by weight,%
+BGnutrientdata,d15N,Nitrogen isotope delta value for 15N measured against a primary reference scale (Atmospheric air),per mil
+BGnutrientdata,C,Elemental percent carbon by weight,%
+BGnutrientdata,d13C,Carbon isotope delta value for 13C measured against a primary reference scale (Vienna Pee Dee Belemnite),per mil
+BGPdata,Reef,Reef name; all are YM; number is block; letter is treatment,
+BGPdata,Transect,"1, 2, or 3 depending on order of sample collection",
+BGPdata,Distance,1 or 20 meters from reef,m
+BGPdata,Core,"Replicate (1, 2, or 3)",
+BGPdata,Contents,"ContentAbbreviation_SubreplicateNumberIfApplicable; Content abbreviations: S=sheaths, Rz=rhizomes, Rt=roots",
+BGPdata,P,Percent phosphorus by weight,%
+BGPdata,SampleID,"Reef_Transect_Distance_Core_ContentAbbreviation_SubreplicateNumberIfApplicable (Content abbreviations: S=sheaths, Rz=rhizomes, Rt=roots)",
+bladeareaweight_BG,Reef,Reef name; all are YM; number is block; letter is treatment,
+bladeareaweight_BG,Block,Block of reefs in experimental design (1-4),
+bladeareaweight_BG,Treatment,Nutrient treatment in experimental design (A-D),
+bladeareaweight_BG,Transect,"1, 2, or 3 depending on order of sample collection",
+bladeareaweight_BG,Distance,1 or 20 meters from reef,m
+bladeareaweight_BG,Core,"Replicate (1, 2, or 3)",
+bladeareaweight_BG,agweight,Total dry weight of blades + sheaths in core (in g) * 100 to be in g/m2,g/m2
+bladeareaweight_BG,bgweight,Total dry weight of rhizomes + roots in core (in g) * 100 to be in g/m2,g/m2
+bladeareaweight_BG,corebladeaream2,Total blade area in core (mm2) * 100 to be in mm2/m2,mm2/m2
+bladeareaweight_BG,shootsm2,Number of shoots in core * 100 to be in shoots/m2,shoots/m2
+bladeareaweight_BG,corebladeweightm2,Total blade dry weight in core (g) * 100 to be in g/m2,g/m2
+bladeareaweight_BG,coreprodweight,Blade dry weight production in core * 100 to be in g/m2/d,g/m2/d
+bladeareaweight_BG,bgprod,Belowground dry weight production calculated from model run,g/m2/d
+reef.fish.nutrients,reef.date,"Reef-Month/Day/Year (Reef name: number is block, letter is treatment)",
+reef.fish.nutrients,n,"Nitrogen supply to reef from fish biomass, calculated from model",g/day/reef
+reef.fish.nutrients,p,"Phosphorus supply to reef from fish biomass, calculated from model",g/day/reef
+reef.fish.nutrients,biomass.tot,Total fish biomass on reef,g
+Syrdata,CoreID,Reef_Transect_Distance_Core,
+Syrdata,Reef,Reef name; all are YM; number is block; letter is treatment,
+Syrdata,Transect,"1, 2, or 3 depending on order of sample collection",
+Syrdata,Distance,1 or 20 meters from reef,m
+Syrdata,Core,"Replicate (1, 2, or 3)",
+Syrdata,Species,Syringodium filiforme,
+Syrdata,Tin,Tin used for weighing,
+Syrdata,Contents,"Part of plant (blades, rhizomes, roots)",
+Syrdata,Dry_weight,Dry weight of subsample in this row,g
