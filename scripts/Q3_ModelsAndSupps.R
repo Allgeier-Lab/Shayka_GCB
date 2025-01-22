@@ -9,7 +9,6 @@ library(nortest) #for checking assumptions of linear models
 library(nlme) #for lme function for mixed effects models
 library(MuMIn) #for dredge
 library(emmeans) #for post-hoc tests
-library(GGally) #for correlation plots
 
 ##Load functions ------------
 stand <- function(X) { (X-mean(X,na.rm=T))/(2*sd(X,na.rm=T)) }
@@ -401,13 +400,13 @@ ggsave(filename = "figS5.pdf", path="outputs", plot=allCplots, device = "pdf", w
 ##Drivers of turnover ----------
 ###Models -----------
 ####AG -----------
-agCturnpred2 <- lm(log(agCturn) ~ avgheight + shootsm2 + bgprod, data= databydist) #pretty good assumptions
-summary(agCturnpred2)
+agCturnpred4 <- lm(log(agCturn) ~ avgheight + shootsm2, data= databydist) #good assumptions
+summary(agCturnpred4)
 
 #checks model assumptions
 quartz()
-rm=resid(agCturnpred2)
-fm=fitted(agCturnpred2)
+rm=resid(agCturnpred4)
+fm=fitted(agCturnpred4)
 model2=lm(rm~fm)
 par(mfrow=c(3,2))
 plot(model2)
@@ -415,20 +414,16 @@ hist(rm)
 plot(c(0,5),c(0,5))
 text(3,3.5,paste("shapiro = ",round(shapiro.test(rm)[[2]],3)),cex=2)
 text(3,2,paste("lillie = ",round(nortest::lillie.test(rm)[[2]],3)),cex=2)
-
-options(na.action=na.fail) #dredge doesn't like na.omit, so this changes the default na.action to na.fail; make sure there aren't any NAs in the dataset before this point
-dredge(agCturnpred2)
-options(na.action=na.omit) #this sets the NA situation back to the default na.omit
 
 
 ####BG -----------
-bgCturnpred2 <- lm(sqrt(bgCturn) ~ avgheight + shootsm2 + coreprodweight, data= databydist) #good assumptions
-summary(bgCturnpred2)
+bgCturnpred4 <- lm(sqrt(bgCturn) ~ avgheight + shootsm2, data= databydist) #good assumptions
+summary(bgCturnpred4)
 
 #checks model assumptions
 quartz()
-rm=resid(bgCturnpred2)
-fm=fitted(bgCturnpred2)
+rm=resid(bgCturnpred4)
+fm=fitted(bgCturnpred4)
 model2=lm(rm~fm)
 par(mfrow=c(3,2))
 plot(model2)
@@ -436,20 +431,16 @@ hist(rm)
 plot(c(0,5),c(0,5))
 text(3,3.5,paste("shapiro = ",round(shapiro.test(rm)[[2]],3)),cex=2)
 text(3,2,paste("lillie = ",round(nortest::lillie.test(rm)[[2]],3)),cex=2)
-
-options(na.action=na.fail) #dredge doesn't like na.omit, so this changes the default na.action to na.fail; make sure there aren't any NAs in the dataset before this point
-dredge(bgCturnpred2)
-options(na.action=na.omit) #this sets the NA situation back to the default na.omit
 
 
 ####Total -----------
-totCturnpred2 <- lm(sqrt(totCturn) ~ log(avgheight) + log(shootsm2) + log(coreprodweight) + log(bgprod), data= databydist) #good assumptions
-summary(totCturnpred2)
+totCturnpred4 <- lm(sqrt(totCturn) ~ log(avgheight) + log(shootsm2), data= databydist) #good assumptions
+summary(totCturnpred4)
 
 #checks model assumptions
 quartz()
-rm=resid(totCturnpred2)
-fm=fitted(totCturnpred2)
+rm=resid(totCturnpred4)
+fm=fitted(totCturnpred4)
 model2=lm(rm~fm)
 par(mfrow=c(3,2))
 plot(model2)
@@ -457,13 +448,6 @@ hist(rm)
 plot(c(0,5),c(0,5))
 text(3,3.5,paste("shapiro = ",round(shapiro.test(rm)[[2]],3)),cex=2)
 text(3,2,paste("lillie = ",round(nortest::lillie.test(rm)[[2]],3)),cex=2)
-
-options(na.action=na.fail) #dredge doesn't like na.omit, so this changes the default na.action to na.fail; make sure there aren't any NAs in the dataset before this point
-dredge(totCturnpred2)
-options(na.action=na.omit) #this sets the NA situation back to the default na.omit
-
-besttotCturnmod <- lm(sqrt(totCturn) ~ log(avgheight) + log(shootsm2) + log(bgprod), data= databydist) 
-summary(besttotCturnmod)
 
 
 

@@ -634,63 +634,54 @@ ggsave(filename = "fig4bcd.pdf", path="outputs", plot=plotsforfig4, device = "pd
 
 ##Figure 5 -----------------
 agCturn_comboplot <- databydist %>%
-  ggplot(aes(x=avgheight, y=agCturn, size=shootsm2, fill=bgprod)) +
-  geom_point(pch=21, colour="white", stroke=.2) + 
-  scale_size(range = c(1, 7.5)) +
+  ggplot(aes(x=avgheight, y=agCturn, fill=shootsm2)) +
+  geom_point(pch=21, colour="white", stroke=.2, size=5) + 
   theme_classic() +
   labs(y=expression('AG C Turnover ('*day^-1*')'),
        x='Blade Height (mm)',
-       size=expression('Shoots'~m^-2),
-       fill=expression('BG Production ('*g^-1~m^-2~d^-1*')'),
+       fill=expression('Shoots'~m^-2),
        tag = "(a)") +
-  theme(legend.position="bottom", legend.box="vertical") +
-  guides(size = guide_legend(order = 1, override.aes = list(colour="black",stroke=.5)), 
-         fill = guide_colorbar(order = 2)) +
-  theme(axis.text = element_text(size = 13.5), 
-        axis.title = element_text(size = 13.5),
-        plot.tag = element_text(size=13.5)) + 
+  theme(legend.position="bottom",
+        axis.text = element_text(size = 13.5), 
+        axis.title = element_text(size = 15),
+        legend.title = element_text(size = 15),
+        plot.tag = element_text(size=15)) + 
   theme(panel.border = element_rect(colour = "black", fill=NA))
 
 bgCturn_comboplot <- databydist %>%
-  ggplot(aes(x=avgheight, y=bgCturn, size=shootsm2, fill=coreprodweight)) +
-  geom_point(pch=21, colour="white", stroke=.2) + 
-  scale_size(range = c(1, 7.5)) +
+  ggplot(aes(x=avgheight, y=bgCturn, fill=shootsm2)) +
+  geom_point(pch=21, colour="white", stroke=.2, size=5) + 
   theme_classic() +
   labs(y=expression('BG C Turnover ('*day^-1*')'),
        x='Blade Height (mm)',
-       size=expression('Shoots'~m^-2),
-       fill=expression('AG Production ('*g^-1~m^-2~d^-1*')'),
+       fill=expression('Shoots'~m^-2),
        tag = "(b)") +
-  theme(legend.position="bottom", legend.box="vertical") +
-  guides(size = guide_legend(order = 1, override.aes = list(colour="black",stroke=.5)), 
-         fill = guide_colorbar(order = 2)) +
-  theme(axis.text = element_text(size = 13.5), 
-        axis.title = element_text(size = 13.5),
-        plot.tag = element_text(size=13.5)) +
+  theme(legend.position="bottom",
+        axis.text = element_text(size = 13.5), 
+        axis.title = element_text(size = 15),
+        legend.title = element_text(size = 15),
+        plot.tag = element_text(size=15)) +
   theme(panel.border = element_rect(colour = "black", fill=NA))
 
 totCturn_comboplot <- databydist %>%
-  ggplot(aes(x=avgheight, y=totCturn, size=shootsm2, fill=bgprod)) +
-  geom_point(pch=21, colour="white", stroke=.2) + #stroke changes size of border
-  scale_size(range = c(1, 7.5)) +
+  ggplot(aes(x=avgheight, y=totCturn, fill=shootsm2)) +
+  geom_point(pch=21, colour="white", stroke=.2, size=5) + #stroke changes size of border
   theme_classic() +
   labs(y=expression('Total C Turnover ('*day^-1*')'),
        x='Blade Height (mm)',
-       size=expression('Shoots'~m^-2),
-       fill=expression('BG Production ('*g^-1~m^-2~d^-1*')'),
+       fill=expression('Shoots'~m^-2),
        tag = "(c)") +
-  theme(legend.position="bottom", legend.box="vertical") +
-  guides(size = guide_legend(order = 1, override.aes = list(colour="black",stroke=.5)), #override.aes changes legend to make it readable
-         fill = guide_colorbar(order = 2)) +
-  theme(axis.text = element_text(size = 13.5), 
-        axis.title = element_text(size = 13.5),
-        plot.tag = element_text(size=13.5)) +
+  theme(legend.position="bottom",
+        axis.text = element_text(size = 13.5), 
+        axis.title = element_text(size = 15),
+        legend.title = element_text(size = 15),
+        plot.tag = element_text(size=15)) +
   theme(panel.border = element_rect(colour = "black", fill=NA))
 
-corrs2forfig5 <- ggpubr::ggarrange(agCturn_comboplot, bgCturn_comboplot, totCturn_comboplot,
-                                   ncol = 3, nrow = 1)
+corrsforfig5 <- ggpubr::ggarrange(agCturn_comboplot, bgCturn_comboplot, totCturn_comboplot,
+                                   ncol = 3, nrow = 1, common.legend = T, legend="bottom")
 
-ggsave(filename = "fig5.pdf", path="outputs", plot=corrs2forfig5, device = "pdf", width = 14, height = 5.5, units="in", dpi=300)
+ggsave(filename = "fig5.pdf", path="outputs", plot=corrsforfig5, device = "pdf", width = 14, height = 4.5, units="in", dpi=300)
 
 
 ##Figure S1 -----------------
