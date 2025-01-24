@@ -79,25 +79,25 @@ bladeareaweight_BG,shootsm2,Number of shoots in core * 100 to be in shoots/m2,sh
 bladeareaweight_BG,corebladeweightm2,Total blade dry weight in core (g) * 100 to be in g/m2,g/m2
 bladeareaweight_BG,coreprodweight,Blade dry weight production in core * 100 to be in g/m2/d,g/m2/d
 bladeareaweight_BG,bgprod,Belowground dry weight production calculated from model run,g/m2/d
-FISH_NUTR_INPUT_20M,x,,
+FISH_NUTR_INPUT_20M,x,Nutrient input to model per timestep,g/m2/d
 reef.fish.nutrients,reef.date,"Reef-Month/Day/Year (Reef name: number is block, letter is treatment)",
 reef.fish.nutrients,n,"Nitrogen supply to reef from fish biomass, calculated from model",g/day/reef
 reef.fish.nutrients,p,"Phosphorus supply to reef from fish biomass, calculated from model",g/day/reef
 reef.fish.nutrients,biomass.tot,Total fish biomass on reef,g
-seafloor_1m,timestep,,
-seafloor_1m,ag_biomass,,
-seafloor_1m,bg_biomass,,
-seafloor_1m,ag_production,,
-seafloor_1m,bg_production,,
+seafloor_1m,timestep,i'th iteration of model time,"i iterations, i = 120 minutes"
+seafloor_1m,ag_biomass,Aboveground seagrass biomass (modeled),g/m2
+seafloor_1m,bg_biomass,Belowground seagrass biomass (modeled),g/m2
+seafloor_1m,ag_production,Aboveground seagrass production (modeled),g/m2/d
+seafloor_1m,bg_production,Belowground seagrass production (modeled),g/m2/d
 seafloor_1m,distance,1 meter from reef,m
-seafloor_1m,xy_int,,
-seafloor_20m,timestep,,
-seafloor_20m,ag_biomass,,
-seafloor_20m,bg_biomass,,
-seafloor_20m,ag_production,,
-seafloor_20m,bg_production,,
+seafloor_1m,xy_int,Coordinate pair of 1m2 cell,
+seafloor_20m,timestep,i'th iteration of model time,"i iterations, i = 120 minutes"
+seafloor_20m,ag_biomass,Aboveground seagrass biomass (modeled),g/m2
+seafloor_20m,bg_biomass,Belowground seagrass biomass (modeled),g/m2
+seafloor_20m,ag_production,Aboveground seagrass production (modeled),g/m2/d
+seafloor_20m,bg_production,Belowground seagrass production (modeled),g/m2/d
 seafloor_20m,distance,20 meters from reef,m
-seafloor_20m,xy_int,,
+seafloor_20m,xy_int,Coordinate pair of 1m2 cell,
 Syrdata,CoreID,Reef_Transect_Distance_Core,
 Syrdata,Reef,Reef name; all are YM; number is block; letter is treatment,
 Syrdata,Transect,"1, 2, or 3 depending on order of sample collection",
