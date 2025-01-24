@@ -20,12 +20,12 @@ AGdata,Epiphyte_Tin,Tin used for weighing,
 AGdata,Blade_dry_weight,Total dry weight of all blades within a shoot,g
 AGdata,Epiphyte_dry_weight,Total dry weight of all epiphytes from a shoot,g
 AGdata,Bites,Total number of fish bites on all blades in a shoot,bites
-AGnutrient data,Contents,"Part of plant (blades, sheaths, rhizomes, roots, flowers, detritus)",
-AGnutrient data,CoreID,Reef_Transect_Distance_Core,
-AGnutrient data,N,Elemental percent nitrogen by weight,%
-AGnutrient data,d15N,Nitrogen isotope delta value for 15N measured against a primary reference scale (Atmospheric air),per mil
-AGnutrient data,C,Elemental percent carbon by weight,%
-AGnutrient data,d13C,Carbon isotope delta value for 13C measured against a primary reference scale (Vienna Pee Dee Belemnite),per mil
+AGnutrientdata,Contents,"Part of plant (blades, sheaths, rhizomes, roots, flowers, detritus)",
+AGnutrientdata,CoreID,Reef_Transect_Distance_Core,
+AGnutrientdata,N,Elemental percent nitrogen by weight,%
+AGnutrientdata,d15N,Nitrogen isotope delta value for 15N measured against a primary reference scale (Atmospheric air),per mil
+AGnutrientdata,C,Elemental percent carbon by weight,%
+AGnutrientdata,d13C,Carbon isotope delta value for 13C measured against a primary reference scale (Vienna Pee Dee Belemnite),per mil
 AGPdata,Reef,Reef name; all are YM; number is block; letter is treatment,
 AGPdata,Transect,"1, 2, or 3 depending on order of sample collection",
 AGPdata,Distance,1 or 20 meters from reef,m
@@ -54,6 +54,18 @@ BGPdata,Core,"Replicate (1, 2, or 3)",
 BGPdata,Contents,"ContentAbbreviation_SubreplicateNumberIfApplicable; Content abbreviations: S=sheaths, Rz=rhizomes, Rt=roots",
 BGPdata,P,Percent phosphorus by weight,%
 BGPdata,SampleID,"Reef_Transect_Distance_Core_ContentAbbreviation_SubreplicateNumberIfApplicable (Content abbreviations: S=sheaths, Rz=rhizomes, Rt=roots)",
+bladeareadata,Reef,Reef name; all are YM; number is block; letter is treatment,
+bladeareadata,Block,Block of reefs in experimental design (1-4),
+bladeareadata,Treatment,Nutrient treatment in experimental design (A-D),
+bladeareadata,Transect,"1, 2, or 3 depending on order of sample collection",
+bladeareadata,Distance,1 or 20 meters from reef,m
+bladeareadata,Core,"Replicate (1, 2, or 3)",
+bladeareadata,agweight,Total dry weight of blades + sheaths in core (in g) * 100 to be in g/m2,g/m2
+bladeareadata,bgweight,Total dry weight of rhizomes + roots in core (in g) * 100 to be in g/m2,g/m2
+bladeareadata,corebladeaream2,Total blade area in core (mm2) * 100 to be in mm2/m2,mm2/m2
+bladeareadata,shootsm2,Number of shoots in core * 100 to be in shoots/m2,shoots/m2
+bladeareadata,corebladeweightm2,Total blade dry weight in core (g) * 100 to be in g/m2,g/m2
+bladeareadata,coreprodweight,Blade dry weight production in core * 100 to be in g/m2/d,g/m2/d
 bladeareaweight_BG,Reef,Reef name; all are YM; number is block; letter is treatment,
 bladeareaweight_BG,Block,Block of reefs in experimental design (1-4),
 bladeareaweight_BG,Treatment,Nutrient treatment in experimental design (A-D),
@@ -67,10 +79,25 @@ bladeareaweight_BG,shootsm2,Number of shoots in core * 100 to be in shoots/m2,sh
 bladeareaweight_BG,corebladeweightm2,Total blade dry weight in core (g) * 100 to be in g/m2,g/m2
 bladeareaweight_BG,coreprodweight,Blade dry weight production in core * 100 to be in g/m2/d,g/m2/d
 bladeareaweight_BG,bgprod,Belowground dry weight production calculated from model run,g/m2/d
+FISH_NUTR_INPUT_20M,x,,
 reef.fish.nutrients,reef.date,"Reef-Month/Day/Year (Reef name: number is block, letter is treatment)",
 reef.fish.nutrients,n,"Nitrogen supply to reef from fish biomass, calculated from model",g/day/reef
 reef.fish.nutrients,p,"Phosphorus supply to reef from fish biomass, calculated from model",g/day/reef
 reef.fish.nutrients,biomass.tot,Total fish biomass on reef,g
+seafloor_1m,timestep,,
+seafloor_1m,ag_biomass,,
+seafloor_1m,bg_biomass,,
+seafloor_1m,ag_production,,
+seafloor_1m,bg_production,,
+seafloor_1m,distance,1 meter from reef,m
+seafloor_1m,xy_int,,
+seafloor_20m,timestep,,
+seafloor_20m,ag_biomass,,
+seafloor_20m,bg_biomass,,
+seafloor_20m,ag_production,,
+seafloor_20m,bg_production,,
+seafloor_20m,distance,20 meters from reef,m
+seafloor_20m,xy_int,,
 Syrdata,CoreID,Reef_Transect_Distance_Core,
 Syrdata,Reef,Reef name; all are YM; number is block; letter is treatment,
 Syrdata,Transect,"1, 2, or 3 depending on order of sample collection",
