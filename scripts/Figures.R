@@ -49,7 +49,52 @@ data5nutsSummary <- data5nutsLong %>%
             Cturnmean = mean(Cturn),
             Cturnsd = sd(Cturn))
 
-##Figure 2 (Fig 1 is conceptual diagram) -----------------
+##Figure 1 (just the nutrient plot part) -----------------
+
+reefnutsplot <- databydist %>%
+  ungroup() %>%
+  select(Reef, avgfishN, avgfishP, fertN, fertP) %>%
+  mutate(avgfishP = avgfishP * 10, fertP = fertP * 10) %>% #this is for dual axis plotting
+  pivot_longer(cols = c(avgfishN,avgfishP,fertN,fertP), 
+               names_to = c("source", ".value"), 
+               names_pattern = "(.+)(.)$") %>% 
+  pivot_longer(cols = c(N,P),
+               names_to = "nutrient") %>%
+  group_by(Reef, source, nutrient) %>%
+  summarise(value = mean(value)) %>%
+  group_by(Reef,nutrient) %>%
+  mutate(total = cumsum(value),
+         ordering = max(total)) %>% #this makes a column with max N and P values repeated for each reef to help with sorting x axis by total N
+  ggplot(aes(x=forcats::fct_reorder(Reef, ordering), y=total, fill=nutrient)) +
+  geom_col(data = . %>% filter(source=="avgfish"), position = position_dodge(width = 0.9), alpha = 1) +
+  geom_col(data = . %>% filter(source=="fert"), position = position_dodge(width = 0.9), alpha = 0.5) +
+  geom_tile(aes(y=NA_integer_, alpha = factor(source))) + 
+  scale_alpha_manual(values = c(1,0.4), labels = c("avgfish" = "Fish-derived", "fert" = "Anthropogenic")) +
+  scale_y_continuous(expression('N'~g~day^-1), sec.axis = sec_axis(~ . / 10, name = expression('P'~g~day^-1)), expand=expansion(mult=0,add=c(0,0.2))) + #removes space at bottom but not top
+  theme_classic() + 
+  scale_fill_manual(values = c(N = "#FFC20A", P = "#0C7BDC")) +
+  labs(alpha= "Nutrient Source") +
+  guides(fill = "none") +
+  theme(axis.title.y = element_text(color = "#FFC20A", size=18),
+        axis.text.y = element_text(color = "#FFC20A", size=18),
+        axis.title.y.right = element_text(color = "#0C7BDC", size=18),
+        axis.text.y.right = element_text(color = "#0C7BDC", size=18),
+        axis.text.x = element_text(size=18, colour = "black", angle = 90, vjust = .5),
+        axis.title.x = element_blank(),
+        panel.border = element_rect(colour = "black", fill=NA),
+        legend.position = "inside",
+        legend.position.inside = c(.2,.8),
+        legend.title = element_text(size = 15),
+        legend.text = element_text(size = 15)) + 
+  scale_x_discrete(labels = c('YM1A' = '-F-A', 'YM2A'= '-F-A', 'YM3A'= '-F-A', 'YM4A' = '-F-A',
+                              'YM1B' = '+F-A', 'YM2B' = '+F-A', 'YM3B' = '+F-A', 'YM4B' = '+F-A',
+                              'YM1C' = '-F+A', 'YM2C' = '-F+A', 'YM3C' = '-F+A', 'YM4C' = '-F+A',
+                              'YM1D' = '+F+A', 'YM2D' = '+F+A', 'YM3D' = '+F+A', 'YM4D' = '+F+A'))
+
+ggsave(filename = "fig1.pdf", path="outputs", plot=reefnutsplot, device = "pdf", width = 9, height = 4, units="in", dpi=300)
+
+
+##Figure 2 -----------------
 ###a - categorical matrix -------------
 ####load models ---------
 prodmodel1f3 <- lme(stand(log(coreprodweight+1)) ~ fish * fert, random = ~ 1|Block, data= bydist1mf) 
@@ -539,7 +584,7 @@ combosummary <- tibble(treatment = c("fish","fish","fish", "fert","fert","fert",
         plot.margin = margin(5,98,89,50.5)) +
   theme(panel.spacing.x = unit(1.6, "lines")) +
   labs(tag = "(c)") +
-  scale_x_discrete(labels = c("fish" = "Fish-derived", "fert" = "Anthropogenic", "fish x fert" = "Fish x Anthro")) 
+  scale_x_discrete(labels = c("fish" = "Fish-derived", "fert" = "Anthropogenic", "fish x fert" = "Fish x Anthro", "NP" = "N:P")) 
 
 ggsave(filename = "matrixsummary.pdf", path="outputs", plot=combosummary, device = "pdf", width = 3.7, height = 2.5, units="in", dpi=300)
 
@@ -684,49 +729,6 @@ corrsforfig5 <- ggpubr::ggarrange(agCturn_comboplot, bgCturn_comboplot, totCturn
 ggsave(filename = "fig5.pdf", path="outputs", plot=corrsforfig5, device = "pdf", width = 14, height = 4.5, units="in", dpi=300)
 
 
-##Figure S1 -----------------
-
-reefnutsplot <- databydist %>%
-  ungroup() %>%
-  select(Reef, avgfishN, avgfishP, fertN, fertP) %>%
-  mutate(avgfishP = avgfishP * 10, fertP = fertP * 10) %>% #this is for dual axis plotting
-  pivot_longer(cols = c(avgfishN,avgfishP,fertN,fertP), 
-               names_to = c("source", ".value"), 
-               names_pattern = "(.+)(.)$") %>% 
-  pivot_longer(cols = c(N,P),
-               names_to = "nutrient") %>%
-  group_by(Reef, source, nutrient) %>%
-  summarise(value = mean(value)) %>%
-  group_by(Reef,nutrient) %>%
-  mutate(total = cumsum(value),
-         ordering = max(total)) %>% #this makes a column with max N and P values repeated for each reef to help with sorting x axis by total N
-  ggplot(aes(x=forcats::fct_reorder(Reef, ordering), y=total, fill=nutrient)) +
-  geom_col(data = . %>% filter(source=="avgfish"), position = position_dodge(width = 0.9), alpha = 1) +
-  geom_col(data = . %>% filter(source=="fert"), position = position_dodge(width = 0.9), alpha = 0.5) +
-  geom_tile(aes(y=NA_integer_, alpha = factor(source))) + 
-  scale_alpha_manual(values = c(1,0.4), labels = c("avgfish" = "Fish-derived", "fert" = "Anthropogenic")) +
-  scale_y_continuous(expression('N'~g~day^-1), sec.axis = sec_axis(~ . / 10, name = expression('P'~g~day^-1)), expand=expansion(mult=0,add=c(0,0.2))) + #removes space at bottom but not top
-  theme_classic() + 
-  scale_fill_manual(values = c(N = "#FFC20A", P = "#0C7BDC")) +
-  labs(alpha= "Nutrient Source") +
-  guides(fill = "none") +
-  theme(axis.title.y = element_text(color = "#FFC20A", size=18),
-        axis.text.y = element_text(color = "#FFC20A", size=18),
-        axis.title.y.right = element_text(color = "#0C7BDC", size=18),
-        axis.text.y.right = element_text(color = "#0C7BDC", size=18),
-        axis.text.x = element_text(size=18, colour = "black", angle = 90, vjust = .5),
-        axis.title.x = element_blank(),
-        panel.border = element_rect(colour = "black", fill=NA),
-        legend.position = "inside",
-        legend.position.inside = c(.2,.8),
-        legend.title = element_text(size = 15),
-        legend.text = element_text(size = 15)) + 
-  scale_x_discrete(labels = c('YM1A' = '-F-A', 'YM2A'= '-F-A', 'YM3A'= '-F-A', 'YM4A' = '-F-A',
-                              'YM1B' = '+F-A', 'YM2B' = '+F-A', 'YM3B' = '+F-A', 'YM4B' = '+F-A',
-                              'YM1C' = '-F+A', 'YM2C' = '-F+A', 'YM3C' = '-F+A', 'YM4C' = '-F+A',
-                              'YM1D' = '+F+A', 'YM2D' = '+F+A', 'YM3D' = '+F+A', 'YM4D' = '+F+A'))
-
-ggsave(filename = "figS1.pdf", path="outputs", plot=reefnutsplot, device = "pdf", width = 9, height = 4, units="in", dpi=300)
 
 
 
