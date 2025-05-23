@@ -70,15 +70,16 @@ reefnutsplot <- databydist %>%
   geom_col(data = . %>% filter(source=="fert"), position = position_dodge(width = 0.9), alpha = 0.5) +
   geom_tile(aes(y=NA_integer_, alpha = factor(source))) + 
   scale_alpha_manual(values = c(1,0.4), labels = c("avgfish" = "Fish-derived", "fert" = "Anthropogenic")) +
+  guides(alpha = guide_legend(reverse = TRUE)) +
   scale_y_continuous(expression('N'~g~day^-1), sec.axis = sec_axis(~ . / 10, name = expression('P'~g~day^-1)), expand=expansion(mult=0,add=c(0,0.2))) + #removes space at bottom but not top
   theme_classic() + 
-  scale_fill_manual(values = c(N = "#FFC20A", P = "#0C7BDC")) +
+  scale_fill_manual(values = c(N = "#E57200", P = "#132C75")) +
   labs(alpha= "Nutrient Source") +
   guides(fill = "none") +
-  theme(axis.title.y = element_text(color = "#FFC20A", size=18),
-        axis.text.y = element_text(color = "#FFC20A", size=18),
-        axis.title.y.right = element_text(color = "#0C7BDC", size=18),
-        axis.text.y.right = element_text(color = "#0C7BDC", size=18),
+  theme(axis.title.y = element_text(color = "#E57200", size=18),
+        axis.text.y = element_text(color = "#E57200", size=18),
+        axis.title.y.right = element_text(color = "#132C75", size=18),
+        axis.text.y.right = element_text(color = "#132C75", size=18),
         axis.text.x = element_text(size=18, colour = "black", angle = 90, vjust = .5),
         axis.title.x = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA),
