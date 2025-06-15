@@ -8,6 +8,7 @@ library(tidyverse)
 library(ggpubr)
 library(nortest) #for checking assumptions of linear models
 library(nlme) #for lme function for mixed effects models
+library(ggpattern) #for nutrient plot
 
 
 ##Load functions ------------
@@ -49,6 +50,42 @@ data5nutsSummary <- data5nutsLong %>%
             Cturnmean = mean(Cturn),
             Cturnsd = sd(Cturn))
 
+reefnutrients <- read_csv('data/reef.fish.nutrients.csv') %>%
+  tidyr::separate_wider_delim(cols = reef.date, delim = "-", names = c("reef", "date")) %>%
+  tidyr::separate_wider_position(cols = reef, widths = c(Block = 1, Treatment = 1)) %>%
+  mutate(Treatment = case_when(Treatment == "a" ~ "A",
+                               Treatment == "b" ~ "B",
+                               Treatment == "c" ~ "C",
+                               Treatment == "d" ~ "D")) %>%
+  group_by(Block, Treatment) %>%
+  summarise(avgfishN = mean(n), #g/day/reef
+            sdfishN = sd(n),
+            avgfishP = mean(p), #g/day/reef
+            sdfishP = sd(p)) %>% 
+  mutate(avgfertN = case_when(Treatment == "A" ~ 0, #g/day/reef
+                           Treatment == "B" ~ 0,
+                           Treatment == "C" ~ 2.7,
+                           Treatment == "D" ~ 2.7),
+         sdfertN = 0,
+         avgfertP = case_when(Treatment == "A" ~ 0, #g/day/reef
+                           Treatment == "B" ~ 0,
+                           Treatment == "C" ~ 0.39,
+                           Treatment == "D" ~ 0.39),
+         sdfertP = 0) %>%
+  unite(col = Reef, Block, Treatment, sep = "") %>%
+  mutate(Reef = str_c("YM",Reef)) %>%
+  mutate(avgfishP = avgfishP*10, avgfertP = avgfertP*10, sdfishP = sdfishP*10, sdfertP = sdfertP*10) %>% #this is for dual axis plotting
+  pivot_longer(cols = c(-Reef),
+               names_to = c("stat","source",".value"),
+               names_pattern = "(.+)(....)(.)$") %>%
+  pivot_longer(cols = c(N,P),
+               names_to = "nutrient") %>%
+  filter(stat=="sd") %>%
+  mutate(source = case_when(source == "fish" ~ "avgfish",
+                            source == "fert" ~ "fert")) %>%
+  rename(stdev = value) %>%
+  select(-stat)
+
 ##Figure 1 (just the nutrient plot part) -----------------
 
 reefnutsplot <- databydist %>%
@@ -62,12 +99,14 @@ reefnutsplot <- databydist %>%
                names_to = "nutrient") %>%
   group_by(Reef, source, nutrient) %>%
   summarise(value = mean(value)) %>%
+  left_join(.,reefnutrients) %>% #adds the stdev values to the dataframe
   group_by(Reef,nutrient) %>%
   mutate(total = cumsum(value),
          ordering = max(total)) %>% #this makes a column with max N and P values repeated for each reef to help with sorting x axis by total N
   ggplot(aes(x=forcats::fct_reorder(Reef, ordering), y=total, fill=nutrient)) +
-  geom_col(data = . %>% filter(source=="avgfish"), position = position_dodge(width = 0.9), alpha = 1) +
-  geom_col(data = . %>% filter(source=="fert"), position = position_dodge(width = 0.9), alpha = 0.5) +
+  geom_col(data = . %>% filter(source=="fert"), position = position_dodge(width = 0.9), alpha = 0.5) +  #alpha = 0.5
+  geom_col(data = . %>% filter(source=="avgfish"), position = position_dodge(width = 0.9)) + #alpha = 1
+  geom_errorbar(data = . %>% filter(source=="avgfish"), aes(ymin=value-stdev, ymax=value+stdev, x=Reef), position = position_dodge(width = 0.9), width=.4, size =.7) + 
   geom_tile(aes(y=NA_integer_, alpha = factor(source))) + 
   scale_alpha_manual(values = c(1,0.4), labels = c("avgfish" = "Fish-derived", "fert" = "Anthropogenic")) +
   guides(alpha = guide_legend(reverse = TRUE)) +
