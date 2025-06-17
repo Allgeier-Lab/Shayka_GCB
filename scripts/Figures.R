@@ -112,13 +112,13 @@ reefnutsplot <- databydist %>%
   guides(alpha = guide_legend(reverse = TRUE)) +
   scale_y_continuous(expression('N'~g~day^-1), sec.axis = sec_axis(~ . / 10, name = expression('P'~g~day^-1)), expand=expansion(mult=0,add=c(0,0.2))) + #removes space at bottom but not top
   theme_classic() + 
-  scale_fill_manual(values = c(N = "#E57200", P = "#132C75")) +
+  scale_fill_manual(values = c(N = "#EE7624", P = "#00205C")) +
   labs(alpha= "Nutrient Source") +
   guides(fill = "none") +
-  theme(axis.title.y = element_text(color = "#E57200", size=18),
-        axis.text.y = element_text(color = "#E57200", size=18),
-        axis.title.y.right = element_text(color = "#132C75", size=18),
-        axis.text.y.right = element_text(color = "#132C75", size=18),
+  theme(axis.title.y = element_text(color = "#EE7624", size=18),
+        axis.text.y = element_text(color = "#EE7624", size=18),
+        axis.title.y.right = element_text(color = "#00205C", size=18),
+        axis.text.y.right = element_text(color = "#00205C", size=18),
         axis.text.x = element_text(size=18, colour = "black", angle = 90, vjust = .5),
         axis.title.x = element_blank(),
         panel.border = element_rect(colour = "black", fill=NA),
