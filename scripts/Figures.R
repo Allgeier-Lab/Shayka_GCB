@@ -263,7 +263,7 @@ catmodelplot1m <- ggplot(long1mf, aes(x=treatment, y=fct_rev(response), fill=est
                               'Sheath d13C' = expression('Sheath'~delta^13*'C'),
                               'Rhizome d13C' = expression('Rhizome'~delta^13*'C'),
                               'Root d13C' = expression('Root'~delta^13*'C'))) +
-  labs(tag = "(a)") +
+  labs(tag = "(a)") + theme(plot.tag = element_text(face = "bold")) +
   scale_x_discrete(labels = c("fish" = "Fish-derived", "fert" = "Anthropogenic", "fish x fert" = "Fish x Anthro")) 
 
 ggsave(filename = "catmatrix.pdf", path="outputs", plot=catmodelplot1m, device = "pdf", width = 3, height = 6, units="in", dpi=300)
@@ -585,7 +585,7 @@ contmodelplot1m <- ggplot(long1m, aes(x=treatment, y=fct_rev(response), fill=est
   scale_fill_gradient2(low = "#1151FF", mid = "white", high = "#D50E0E", midpoint = 0) +
   guides(fill = guide_colourbar(title = "Effect Size", size = 12),
          color = "none") + 
-  labs(tag = "(b)") +
+  labs(tag = "(b)") + theme(plot.tag = element_text(face = "bold")) +
   scale_y_discrete(labels = c('Blade d13C' = expression('Blade'~delta^13*'C'),
                               'Sheath d13C' = expression('Sheath'~delta^13*'C'),
                               'Rhizome d13C' = expression('Rhizome'~delta^13*'C'),
@@ -623,7 +623,7 @@ combosummary <- tibble(treatment = c("fish","fish","fish", "fert","fert","fert",
         axis.text.y = element_text(size = 12),
         plot.margin = margin(5,98,89,50.5)) +
   theme(panel.spacing.x = unit(1.6, "lines")) +
-  labs(tag = "(c)") +
+  labs(tag = "(c)") + theme(plot.tag = element_text(face = "bold")) +
   scale_x_discrete(labels = c("fish" = "Fish-derived", "fert" = "Anthropogenic", "fish x fert" = "Fish x Anthro", "NP" = "N:P")) 
 
 ggsave(filename = "matrixsummary.pdf", path="outputs", plot=combosummary, device = "pdf", width = 3.7, height = 2.5, units="in", dpi=300)
@@ -648,7 +648,7 @@ Cstockcomboplot <- ggplot() +
   theme_classic() +
   labs(x = "Nutrient treatment",
        y = expression('C Stock ('*gC~m^-2*')'),
-       tag = "(b)") +
+       tag = "(b)") + theme(plot.tag = element_text(face = "bold")) +
   scale_x_discrete(labels = c('1' = "B",
                               '2' = "-F-A",
                               '3' = "+F-A",
@@ -672,7 +672,7 @@ Cprodcomboplot <- ggplot() +
   theme_classic() +
   labs(x = "Nutrient treatment",
        y = expression('C Production ('*gC~m^-2~d^-1*')'),
-       tag = "(c)") +
+       tag = "(c)") + theme(plot.tag = element_text(face = "bold")) +
   scale_x_discrete(labels = c('1' = "B",
                               '2' = "-F-A",
                               '3' = "+F-A",
@@ -696,7 +696,7 @@ Cturncomboplot <- ggplot() +
   theme_classic() +
   labs(x = "Nutrient treatment",
        y = expression('C Turnover ('*d^-1*')'),
-       tag = "(d)") +
+       tag = "(d)") + theme(plot.tag = element_text(face = "bold")) +
   scale_x_discrete(labels = c('1' = "B",
                               '2' = "-F-A",
                               '3' = "+F-A",
@@ -725,7 +725,7 @@ agCturn_comboplot <- databydist %>%
   labs(y=expression('AG C Turnover ('*day^-1*')'),
        x='Blade Height (mm)',
        fill=expression('Shoots'~m^-2),
-       tag = "(a)") +
+       tag = "(a)") + theme(plot.tag = element_text(face = "bold")) +
   theme(legend.position="bottom",
         axis.text = element_text(size = 13.5), 
         axis.title = element_text(size = 15),
@@ -740,7 +740,7 @@ bgCturn_comboplot <- databydist %>%
   labs(y=expression('BG C Turnover ('*day^-1*')'),
        x='Blade Height (mm)',
        fill=expression('Shoots'~m^-2),
-       tag = "(b)") +
+       tag = "(b)") + theme(plot.tag = element_text(face = "bold")) +
   theme(legend.position="bottom",
         axis.text = element_text(size = 13.5), 
         axis.title = element_text(size = 15),
@@ -755,7 +755,7 @@ totCturn_comboplot <- databydist %>%
   labs(y=expression('Total C Turnover ('*day^-1*')'),
        x='Blade Height (mm)',
        fill=expression('Shoots'~m^-2),
-       tag = "(c)") +
+       tag = "(c)") + theme(plot.tag = element_text(face = "bold")) +
   theme(legend.position="bottom",
         axis.text = element_text(size = 13.5), 
         axis.title = element_text(size = 15),
