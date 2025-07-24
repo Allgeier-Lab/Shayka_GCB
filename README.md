@@ -3,7 +3,4 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-This repository stores the code and data for "Nutrient enrichment increases blue carbon potential of subtropical seagrass beds" by Bridget F. Shayka, Sean Richards, Mona A. Andskog, Jacob E. Allgeier. Submitted to Global Change Biology.
-
-
-This manuscript is currently in the review and publication process. Please do not use this code without contacting the lead author first.
+This repository stores the code and data for "Nutrient enrichment increases blue carbon potential of subtropical seagrass beds" by Bridget F. Shayka, Sean Richards, Mona A. Andskog, Jacob E. Allgeier. 2025. Global Change Biology. https://doi.org/10.1111/gcb.70401
